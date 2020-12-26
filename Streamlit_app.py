@@ -82,7 +82,7 @@ if input_file:
     streamlit.write(f"The critical path of average durations scenario is: {average_critical_path}")
 
     fig, ax = plt.subplots()
-    p.Series(simu_critical_paths).value_counts().plot(kind="bar", title="How often each task is on the critical path");
+    p.Series(simu_critical_paths).value_counts().astype(np,int).plot(kind="bar", title="How often each task is on the critical path");
     streamlit.pyplot(fig)
 
 
