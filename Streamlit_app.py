@@ -81,9 +81,9 @@ if input_file:
     streamlit.write(f"There is a {int(proba_average*100)}% chance that the project finish before the average duration which is equal to {average_duration} days.")
     streamlit.write(f"The critical path of average durations scenario is: {average_critical_path}")
 
-    fig, ax = plt.subplots()
-    p.Series(simu_critical_paths).value_counts().astype(np,int).plot(kind="bar", title="How often each task is on the critical path");
-    streamlit.pyplot(fig)
+    #fig, ax = plt.subplots()
+    #p.Series(simu_critical_paths).value_counts().astype(np,int).plot(kind="bar", title="How often each task is on the critical path");
+    #streamlit.pyplot(fig)
 
 
 
