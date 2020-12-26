@@ -1,0 +1,11 @@
+####### example-requirements.txt #######
+#
+###### Requirements without Version Specifiers ######
+pandas
+streamlit
+plotly
+xlrd
+criticalpath
+openpyxl
+numpy
+matplotlib
