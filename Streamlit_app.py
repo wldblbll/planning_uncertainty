@@ -54,7 +54,7 @@ total_simu = streamlit.number_input("Total number of simulations:", min_value=10
 
 
 if input_file:
-    df = p.read_excel("plan.xlsx", engine="openpyxl")
+    df = p.read_excel(input_file, engine="openpyxl")
     df = create_MonteCarlo_scenarios(df, total_simu)
 
     nodes = {}
