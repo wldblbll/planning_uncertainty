@@ -11,8 +11,7 @@ __version__ = 1.0
 st.title("RobustPlanner")
 st.markdown("Votre outil pour rendre votre planning plus robuste")
 
-
-st.info("""
+st.markdown("""
         #### Etape 1 : Charger les données de planning
         Vous avez deux options ci-dessous :
         """)
@@ -21,7 +20,7 @@ with col1:
     st.markdown("##### Option 1 : Charger vos données")
     st.markdown("Cliquez ci-dessous pour charger votre planning au format Excel")
     input_file = st.file_uploader("Input file:", type=["xlsx", "xls"])
-    st.markdown("Vous pouvez également télécharger un template Excel et le remplir avec vos données.")
+    st.markdown("Vous pouvez télécharger un template Excel ci-dessous et le remplir avec vos données.")
     st.download_button(
         label="📥 Télécharger le template Excel",
         data=open("./data.xlsx", "rb").read(),
@@ -31,7 +30,7 @@ with col1:
 with col2:
     st.markdown("##### Option 2 : Utiliser des données de tests")
     st.markdown("Cliquez sur le bouton ci-dessous pour charger des données fictives et tester l'outil.")
-    load_data_sample = st.button("🧪 Charger un exemple de données")
+    load_data_sample = st.button("Utiliser des données fictives")
 
 if input_file:
     st.session_state['df'] = read_user_data_file(input_file)

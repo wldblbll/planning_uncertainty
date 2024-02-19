@@ -1,6 +1,7 @@
 
 from criticalpath import Node
 import matplotlib.pyplot as plt
+import plotly.express as px
 import numpy as np
 import streamlit as st
 import pandas as p
@@ -36,19 +37,32 @@ def initialize_MonteCarlo_scenarios(df, total_simu):
     return df
 
 
-def plot_duration_for_a_confidence_level(x_simu_durations_sorted, y_frequencies):
-    confidence_level = st.slider('Quel est le niveau de confiance que vous souhaitez avoir (entre 30% et 100%) ?', 30, 100, 90)
+def plot_duration_for_a_confidence_level(x_simu_durations_sorted, y_frequencies, average_total_duration):
+    confidence_level = st.slider('Quel est le niveau de confiance que vous souhaitez avoir (en pourcentage) ?', 10, 100, 90)
     confidence_level = confidence_level / 100.
     duration_at_confidence_level = x_simu_durations_sorted[y_frequencies.searchsorted(confidence_level)]
 
     fig, ax = plt.subplots()
-    plt.xlim(x_simu_durations_sorted[0], x_simu_durations_sorted[-1])
     plt.plot(x_simu_durations_sorted, y_frequencies, marker=".", linestyle="none")
-    #plt.vlines(average_duration, 0, 1, color="green", linestyles="--", label="Average duration");
-    st.success("**Pour être sûr à %d%% de resepecter les deadlines, vous devez annoncer une durée totale de votre projet de %d jours**" % (confidence_level*100, duration_at_confidence_level))
-    plt.vlines(duration_at_confidence_level, 0, 1, color="green", linestyles="--", label="Duration at choosen confidence level is %0.1f" % duration_at_confidence_level);
+    st.success("**Pour être sûr à %d%% de resepecter les deadlines, vous devez annoncer une durée totale de votre projet de %.1f jours**" % (confidence_level*100, duration_at_confidence_level))
+    plt.vlines(duration_at_confidence_level, 0, 1, color="green", linestyles="--", label="Durée totale pour un niveau de confiance de %d%%" % (confidence_level*100));
+    plt.vlines(average_total_duration, 0, 1, color="red", linestyles="--", label="Durée totale en utilisant les valeurs moyennes");
     plt.legend();
+    plt.xlim(x_simu_durations_sorted[0], x_simu_durations_sorted[-1])
+    plt.ylim(0,1)
+    plt.xlabel('Durée totale du projet')
+    plt.ylabel('Probabilité')
     st.pyplot(fig)
+    #fig = px.scatter(x=x_simu_durations_sorted, y=y_frequencies)
+    ##line_name = "Pour un niveau de confiance de {:.1f}, La durée totale est de {} jours".format(confidence_level*100, duration_at_confidence_level)
+    #line_name = "A un niveau de confiance de {:.1f}%".format(confidence_level*100)
+    #fig.add_vline(x=duration_at_confidence_level, line_dash="dash", line_color="green", name=line_name, label={"text": line_name})
+    #line_name = "Avec les durées moyennes"#.format(average_total_duration)
+    #fig.add_vline(x=average_total_duration, line_dash="dash", line_color="red", name=line_name, label={"text": line_name})
+    ##fig.update_layout(showlegend=True)
+    #fig.update_xaxes(title="Durée (en jours)", range=[x_simu_durations_sorted[0], x_simu_durations_sorted[-1]])
+    #fig.update_yaxes(title="Fréquence", range=[0, 1])
+    #st.plotly_chart(fig)
 
 def run_MonteCarlo_simulation(df, total_simu):
     simu_durations = []

@@ -15,11 +15,11 @@ st.markdown("Votre outil pour rendre votre planning plus robuste")
 if 'step' not in st.session_state:
     st.session_state['step'] = 0
 
-st.info("""
-        #### Etape 1 : Charger les données de planning
-        Vous avez deux options ci-dessous :
-        """)
-button_start = st.button("Démarrer")
+#st.info("""
+#        #### Etape 1 : Charger les données de planning
+#        Vous avez deux options ci-dessous :
+#        """)
+button_start = st.button("Démarrer", type="primary", use_container_width=True)
 if button_start:
     st.session_state['step'] = 0
     st.switch_page("pages/step1.py")

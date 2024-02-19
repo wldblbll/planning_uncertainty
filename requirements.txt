@@ -9,3 +9,4 @@ criticalpath
 openpyxl
 numpy
 matplotlib
+statsmodels
