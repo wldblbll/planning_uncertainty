@@ -19,6 +19,11 @@ if 'step' not in st.session_state:
 #        #### Etape 1 : Charger les données de planning
 #        Vous avez deux options ci-dessous :
 #        """)
+video_file = open('demoRobustPlanner.mp4', 'rb')
+video_bytes = video_file.read()
+st.video(video_bytes)
+#https://youtu.be/No1rzwpGvz0
+
 button_start = st.button("Démarrer", type="primary", use_container_width=True)
 if button_start:
     st.session_state['step'] = 0
