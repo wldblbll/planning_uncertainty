@@ -14,7 +14,7 @@ else:
             #### Etape 3 : Charger les données de planning            
             Dans cette étape, vous pouvez choisir le niveau de confiance souhaité, et l'application vous indiquera la durée totale à considérer pour votre projet.
             """)
-    total_simu = 200
+    total_simu = 100
     #total_simu = st.number_input("Total number of simulations:", min_value=10, max_value=500, value=100)
 
     if ('x_simu_durations_sorted' not in st.session_state) or (('run_new_calculation' in st.session_state)):
